@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="tbs.nodemenu">
+	<select id="getChildNodeList" parameterClass="string" resultClass="java.util.HashMap">
+		select group_id as "id", PARENT_group_ID as "parentId", group_name as "text", 1
+		from ikep4_ev_group 
+		where parent_group_id = #value#
+		order by sort_order	
+	</select>
+</sqlMap>
