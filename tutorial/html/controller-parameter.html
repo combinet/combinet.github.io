@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Programming</title>
+<link rel="stylesheet" href="../css/style.css" />
+
+<xmp theme="united" style="display:none;">
+### Controller parameter
+
+1. get 방식(url)
+
+   . client
+
+   ```
+   http://../../tut/getMethodTest.do?p1=v1&p2=v2
+   ```
+
+   . server
+
+   ```
+	@RequestMapping("tut/getMethodTest.do")
+	public String getMethodTest(@RequestParam String p1, @RequestParam String p2, ModelMap model) {
+		String msg = String.format("tut/getMethodTest.do 결과 : \n p1: %s, p2: %s", p1, p2);
+		System.out.format(msg);
+
+		model.addAttribute("getMethodTestMsg", msg);
+		return "tut/result";
+	}
+   ```
+   
+   . [test - http://../../tut/getMethodTest.do?p1=v1&p2=v2](http://../../tut/getMethodTest.do?p1=v1&p2=v2)  
+
+2. post 방식(form) 
+	. client
+	```
+	<form method="post" action="http://../../tut/postMethodTest.do">
+		<input type="hidden" name="hiddenField" value="hiddenValue"/>
+		<p><input type="text" name="textField" value="textValue"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-1"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-2"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-3"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-1"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-2"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-3"/></p>		
+		<div>
+			<select name="selectField">
+				<option value="s0">option1</option>
+				<option value="s1">option1</option>
+				<option value="s2">option1</option>
+				<option value="s3">option1</option>
+			</select>
+		</div>
+		<div>
+			<textarea name="textareaField">text content</textarea>
+		</div>
+		<input type="submit">
+	</form>
+	```  
+   . server
+
+   ```
+	@RequestMapping("/tut/postMethodTest.do")
+    public void postMethodTest(@RequestParam Map data, ModelMap model) {
+    	model.addAttribute("result", data);
+    }
+	```    
+	.test
+	<div>
+		<form method="post" action="../../tut/postMethodTest.do">
+			<input type="hidden" name="hiddenField" value="hiddenValue"/>
+			<p><input type="text" name="textField" value="textValue"/></p>
+			<div>
+				<p><input type="radio" name="radioField" value="radioValue-1"/>radio1 
+				   <input type="radio" name="radioField" value="radioValue-2"/>radio2 
+				   <input type="radio" name="radioField" value="radioValue-3"/>radio3</p>
+			</div>
+			<div>
+				<p><input type="checkbox" name="checkboxField" value="checkboxValue-1"/>checkbox1 
+				   <input type="checkbox" name="checkboxField" value="checkboxValue-2"/>checkbox2 
+				   <input type="checkbox" name="checkboxField" value="checkboxValue-3"/>checkbox3</p>	
+			</div>	
+			<div>
+				<select name="selectField">
+					<option value="s0">option1</option>
+					<option value="s1">option2</option>
+					<option value="s2">option3</option>
+					<option value="s3">option4</option>
+				</select>
+			</div>
+			<div>
+				<textarea name="textareaField" style="display:block">text content</textarea>		
+			</div>
+			<div>
+				<input type="submit">
+			</div>
+		</form>	
+	</div>
+
+3. post 방식(form, controller에서 model 사용)  
+ 
+	. client
+	```
+	<form method="post" action="../../tut/postMethodModel.do">
+		<p><input type="text" name="articleId" value="article-001"/></p>
+		<p><input type="text" name="articleEnTitle" value="기사 이름: LLLLOOO"/></p>
+		<p><input type="number" name="articlePage" value="10"/></p>
+		<p><input type="date" name="regstrDt" /></p>
+		<p><input type="date" name="modfrDt" /></p>
+		<input type="submit">
+	</form>
+	```  
+   . server
+
+   ```
+	@RequestMapping("/tut/postMethodModel.do")
+    public void postMethodModel(@RequestParam Article data, ModelMap jspData) {
+    	jspData.addAttribute("articleData", data);
+    }
+	```    
+	.test
+	<div>
+		<form method="post" action="../../tut/postMethodModel.do">
+			<p><input type="text" name="articleId" value="article-001"/></p>
+			<p><input type="text" name="articleEnTitle" value="기사 이름: LLLLOOO"/></p>
+			<p><input type="number" name="articlePage" value="10"/></p>
+			<p><input type="date" name="regstrDt" /></p>
+			<p><input type="date" name="modfrDt" /></p>
+			<input type="submit">
+		</form>
+	</div>	
+	
+4. get ajax 방식(url)
+
+   . client
+
+   ```
+   http://../../tut/getAjax.do?p1=v1&p2=v2
+   ```
+
+   . server
+
+   ```
+	@SuppressWarnings("rawtypes")
+	@RequestMapping("tut/getAjax.do")
+	@ResponseBody
+	public Map getAjax(@RequestParam String p1, @RequestParam String p2) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("p1", p1);
+		data.put("p2", p2);
+		data.put("success", "success");
+		data.put("no", 10);
+		data.put("booleanData", true);
+
+		return data;
+	}
+   ```
+   
+   . <button id="getAjax">getAjax test</button> 
+   
+5. post ajax 방식(form)
+
+	. client
+	```
+	<form method="post" name="post-form">
+		<input type="hidden" name="hiddenField" value="hiddenValue"/>
+		<p><input type="text" name="textField" value="textValue"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-1"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-2"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-3"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-1"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-2"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-3"/></p>		
+		<div>
+			<select name="selectField">
+				<option value="s0">option1</option>
+				<option value="s1">option1</option>
+				<option value="s2">option1</option>
+				<option value="s3">option1</option>
+			</select>
+		</div>
+		<div>
+			<textarea name="textareaField">text content</textarea>
+		</div>
+		<input id="post-ajax-submit" type="submit">
+	</form>
+	```  
+   . server
+
+   ```
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @ResponseBody
+	@RequestMapping("/tut/postAjax.do")
+    public Map postAjax(@RequestParam Map data, ModelMap model) {
+    	data.put("server success", "success");
+
+    	return data;
+    }
+	```    
+	.test
+	<div>
+		<form method="post" name="post-form">
+			<input type="hidden" name="hiddenField" value="hiddenValue"/>
+			<p><input type="text" name="textField" value="textValue"/></p>
+			<div>
+				<p><input type="radio" name="radioField" value="radioValue-1"/>radio1 
+				   <input type="radio" name="radioField" value="radioValue-2"/>radio2 
+				   <input type="radio" name="radioField" value="radioValue-3"/>radio3</p>
+			</div>
+			<div>
+				<p><input type="checkbox" name="checkboxField" value="checkboxValue-1"/>checkbox1 
+				   <input type="checkbox" name="checkboxField" value="checkboxValue-2"/>checkbox2 
+				   <input type="checkbox" name="checkboxField" value="checkboxValue-3"/>checkbox3</p>	
+			</div>	
+			<div>
+				<select name="selectField">
+					<option value="s0">option1</option>
+					<option value="s1">option2</option>
+					<option value="s2">option3</option>
+					<option value="s3">option4</option>
+				</select>
+			</div>
+			<div>
+				<textarea name="textareaField" style="display:block">text content</textarea>		
+			</div>
+			<div>
+				<input id="post-ajax-submit" type="submit">
+			</div>
+		</form>	
+	</div>   
+	
+6. post ajax 방식(form fileupload)  
+	. client
+	```
+	<form method="post" name="post-file-form">
+		<input type="hidden" name="hiddenField" value="hiddenValue"/>
+		<p><input type="text" name="textField" value="textValue"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-1"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-2"/></p>
+		<p><input type="radio" name="radioField" value="radioValue-3"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-1"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-2"/></p>
+		<p><input type="checkbox" name="checkboxField" value="checkboxValue-3"/></p>		
+		<div>
+			<select name="selectField">
+				<option value="s0">option1</option>
+				<option value="s1">option1</option>
+				<option value="s2">option1</option>
+				<option value="s3">option1</option>
+			</select>
+		</div>
+		<div>
+			<textarea name="textareaField">text content</textarea>
+		</div>
+		<div>
+			<input type="file" name="fileField"/>
+		</div>
+		<input id="post-file-ajax-submit" type="submit">
+	</form>
+	```  
+   . server
+
+   ```
+	@ResponseBody
+	@RequestMapping("/tut/postFileAjax.do")
+    public Map postFileAjax(MultipartHttpServletRequest multiRequest, @RequestParam Map data) {
+    	String fileName = getFileName(multiRequest);
+
+    	data.put("server success", "success");
+    	data.put("uploadFileName", fileName);
+
+    	return data;
+    }
+	```    
+	.test
+	<div>
+		<form method="post" name="post-file-form" enctype="multipart/form-data">
+			<input type="hidden" name="hiddenField" value="hiddenValue"/>
+			<p><input type="text" name="textField" value="textValue"/></p>
+			<div>
+				<p><input type="radio" name="radioField" value="radioValue-1"/>radio1 
+				   <input type="radio" name="radioField" value="radioValue-2"/>radio2 
+				   <input type="radio" name="radioField" value="radioValue-3"/>radio3</p>
+			</div>
+			<div>
+				<p><input type="checkbox" name="checkboxField" value="checkboxValue-1"/>checkbox1 
+				   <input type="checkbox" name="checkboxField" value="checkboxValue-2"/>checkbox2 
+				   <input type="checkbox" name="checkboxField" value="checkboxValue-3"/>checkbox3</p>	
+			</div>	
+			<div>
+				<select name="selectField">
+					<option value="s0">option1</option>
+					<option value="s1">option2</option>
+					<option value="s2">option3</option>
+					<option value="s3">option4</option>
+				</select>
+			</div>
+			<div>
+				<textarea name="textareaField" style="display:block">text content</textarea>		
+			</div>
+			<div>
+				<input type="file" name="fileField"/>
+			</div>
+			<input id="post-file-ajax-submit" type="submit">
+		</form>	
+	</div> 	
+	
+### Controller parameter (ajax json)
+1. post json(Map 사용)
+
+   . client
+
+   ```
+   http://../../tut/postJson.do
+   ```
+
+   . server (Map 사용)
+
+   ```
+	@RequestMapping("tut/postJson.do")
+	@ResponseBody   
+	public Map postJson(@RequestBody Map param) {
+		String msg = String.format("tut/getMethodTest.do 결과 : \n p1: %s, p2: %s", param.get("p1"), param.get("p2"));
+		System.out.format(msg);
+
+		List stringList = new ArrayList();
+		stringList.add("one");
+		stringList.add("two");
+		stringList.add("three");
+
+		param.put("int", 10);
+		param.put("boolean data", true);
+		param.put("date", new Date());
+		param.put("string List", stringList);
+		param.put("message", msg);
+
+		return param;
+	}
+   ```
+   
+   . test (console창 확인) 
+   <button id="btn-postJson">postJson</button> 
+   
+2. post json(Model(VO) 사용)
+
+   . client
+
+   ```
+   http://../../tut/postJsonVO.do
+   ```
+
+   . server (Model(VO) 사용)
+
+   ```
+	@RequestMapping("tut/postJsonVO.do")
+	@ResponseBody
+	public Student postJsonVO(@RequestBody Student param) {
+		LocalDate birth = LocalDate.of(2002, 8, 10);
+		Date birthday = Date.from(birth.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+		param.setBirthday( birthday );
+
+		return  param;
+	}
+   ```
+   
+   . test (controller debug, console창 확인) 
+   <button id="btn-postJsonVO">postJsonVO</button>    
+	
+</xmp>
+
+<div id="index-container">
+	<ul></ul>
+	<button id="btn-index">목차</button>
+</div>
+
+<script src="../../js/lib/jquery-1.11.3.js"></script>
+<script src="../../js/lib/jquery.postjson.js"></script>
+<script src="../md/strapdown.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/controller-parameter.js"></script>
+</html>

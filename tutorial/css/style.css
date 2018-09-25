@@ -1,0 +1,25 @@
+#index-container {
+	position: fixed;
+    bottom: 10px;
+    right: 10px;    
+}
+#index-container ul
+{
+    display: block;
+    border: 1px solid;
+    margin: 0px;
+    -webkit-padding-start: 40px;
+    background: cornsilk;
+}
+#index-container button {
+    position: absolute;
+    width: 100px;
+    right: 10px;
+    bottom: 5px;
+}
+.item-li {
+	border-bottom: 1px solid #ccc;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+}
+ 
