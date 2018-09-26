@@ -71,6 +71,12 @@ eyeSize는 20이 됩니다 라고 말해야겠죠.
 
 이 randomNum라는 이름의 변수 값은 0과 1 사이의 값이겠죠?  
 이 숫자를 표시해 볼께요. [restart](ifelse-text)   
+
+<div id="ifelse1" class="result-div">
+    <p></p>
+</div>
+
+
 restart를 누를 때마다 임의의 숫자들이 생성되네요.  
 0 또는 1만 생성하려면 어떻게 해야 할까요?  
 반올림을 해주는 Math.round()라는 함수를 써야 합니다.  
@@ -80,6 +86,11 @@ restart를 누를 때마다 임의의 숫자들이 생성되네요.
 이름은 roundNum 으로 하죠.
 이 변수에 반올림 된 값을 대입했습니다.  
 다시 이 값을 화면에 표시해 봅시다. [restart](ifelse-round) 
+
+<div id="ifelse2" class="result-div">
+    <p></p>
+    <p></p>
+</div>
 
     var randomNum = Math.random();
     var roundNum = Math.round(randomNum);
@@ -100,7 +111,7 @@ roundNum 변수값이 0과 같다면
 타원을 보라색으로 채우면 됩니다.   
 [restart](ifelse-restart) 
 
-<div id="ifelse" class="result-div">
+<div id="ifelse3" class="result-div">
     <p></p>
     <p></p>
     <p></p>
@@ -138,8 +149,7 @@ roundNum 변수값이 0과 같다면
       $("a[href='ifelse-text']").on("click", function(e) {
         e.preventDefault();
         var randomNum = Math.random();
-        $("#ifelse p:eq(0)").text(randomNum);
-        $("#ifelse p:eq(1)").text("");
+        $("#ifelse1 p:eq(0)").text(randomNum);
       });
 
       $("a[href='ifelse-round']").on("click", function(e) {
@@ -147,8 +157,8 @@ roundNum 변수값이 0과 같다면
         var randomNum = Math.random();
         var roundNum = Math.round(randomNum);
 
-        $("#ifelse p:eq(0)").text(randomNum);
-        $("#ifelse p:eq(1)").text(roundNum);
+        $("#ifelse2 p:eq(0)").text(randomNum);
+        $("#ifelse2 p:eq(1)").text(roundNum);
       });      
     
       $("a[href='ifelse-restart']").on("click", function(e) {
@@ -156,16 +166,16 @@ roundNum 변수값이 0과 같다면
         var randomNum = Math.random();
         var roundNum = Math.round(randomNum);
 
-        $("#ifelse p:eq(0)").text(randomNum);
-        $("#ifelse p:eq(1)").removeClass();
+        $("#ifelse3 p:eq(0)").text(randomNum);
+        $("#ifelse3 p:eq(1)").removeClass();
         
         if(roundNum === 0) {
-          $("#ifelse p:eq(1)").addClass("coin-0")
+          $("#ifelse3 p:eq(1)").addClass("coin-0")
         } else {
-          $("#ifelse p:eq(1)").addClass("coin-1")
+          $("#ifelse3 p:eq(1)").addClass("coin-1")
         }
 
-        $("#ifelse p:eq(2)").text(roundNum);
+        $("#ifelse3 p:eq(2)").text(roundNum);
       });    
     })();
     
