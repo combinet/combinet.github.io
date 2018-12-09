@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Assign</title>
+	<link rel="stylesheet" href="../css/style.css" />
 	<link href="../css/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>	
@@ -86,5 +87,107 @@
 	
 	
 </script>	
+
+<xmp theme="united" style="display:none;">
+	<!DOCTYPE html>
+	<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<title>Assign</title>
+		<link href="../css/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>	
+	<div class="container">
+	<div class="row">
+	  <div class="col-md-5">
+		<select id="nation">
+			<option value="US">미국</option>
+			<option value="CN">중국</option>
+			<option value="DE">독일</option>
+			<option value="VE">베트남</option>
+		</select>  
+		<ul id="target-city"  class="list-group"></ul>
+	  </div>
+	  <div class="col-md-2"> 
+		<ul class="list-group" style="margin-top:20px;">
+		  <a class="list-group-item">+</a>
+		  <a class="list-group-item">-</a>
+		</ul>  	
+	  </div>
+	  <div class="col-md-5">
+		  <ul id="selected-city"></ul>
+	  </div>
+	</div>
+	</div>
+	<script src="../../js/lib/jquery-1.11.3.js"></script>
+		
+	<script>
+		var target = {
+				"US": [{cd: "US08", name: "LA"}, {cd: "US09", name: "뉴욕"}],
+				"CN": [{cd: "CN01", name: "베이징"}, {cd: "CN02", name: "상하이-수정"}, {cd: "CN03", name: "칭다오"}],
+				"DE": [{cd: "DE10", name: "프랑크푸르트"}, {cd: "DE11", name: "베를린"}],
+				"VE": [{cd: "VN07", name: "호치민"}, {cd: "VN08", name: "사이공"}]
+			};	
+		
+		function onChangeNation(e) {
+			var nationCd = $(this).val();
+			var cityList = target[nationCd];
+			
+			console.log(cityList);
+			
+			var html = "";
+			
+			for(var i = 0; i < cityList.length; i++) {
+				html = html + '<li class="list-group-item" data-cd="' + cityList[i].cd + '">' + cityList[i].name + '</li>'; 
+			}
+			
+			console.log(html);
+			
+			$("#target-city").empty().html(html);
+		}
+		
+		function onClickCity(e) {
+			var cityCd = $(this).data("cd");
+			var $li = $(this).clone();
+			var oldCityCd;
+			 
+			var $oldCitys = $("#selected-city").find("li");
+			 
+			for(var i=0; i<$oldCitys.length; i++) {
+				oldCityCd = $( $oldCitys[i] ).data("cd");
+				if(oldCityCd === cityCd) {
+					return;
+				}
+			}
+			
+			$("#selected-city").append($li);
+		}
+		
+		function removeCity(e) {
+			$(this).remove();
+		}
+		
+		
+		$("#nation").on("change", onChangeNation).trigger("change");
+		
+		$("#target-city").on("dblclick", "li", onClickCity);
+		
+		$("#selected-city").on("dblclick", "li", removeCity);
+		
+		
+	</script>	
+</xmp>
+
+<div id="index-container">
+	<ul></ul>
+	<button id="btn-index">목차</button>
+</div>
+
+<script src="../../js/lib/jquery-1.11.3.js"></script>
+<script src="../../js/lib/jquery.postjson.js"></script>
+<script src="../md/strapdown.js"></script>
+<script src="../js/common.js"></script>
+ 
 </body>	
 </html>
