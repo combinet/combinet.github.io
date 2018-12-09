@@ -9,7 +9,7 @@ function setIndex() {
     { title: "iBatis", url: "" },
     { title: "SQL", url: "" },
     { title: "자료모음", url: "" },
-    { title: "Kotra", url: "./programming.html" }
+    { title: "Kotra", url: "./assign.html" }
   ];
 
   const contentEl = '<div id="header-container">';
