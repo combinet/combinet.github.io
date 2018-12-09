@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery</title>
+<link rel="stylesheet" href="../css/style.css" />
+
+<xmp theme="united" style="display:none;">
+### 기존 element를 복사하여 추가하는 방법
+
+<form id="test1">
+	<div>
+		<input type="text" name="id" value="id100">
+	</div>
+
+	<div id="target-1">
+		<div>
+			<input type="text" name="uname" value="test-name">
+		</div>
+		<div>
+			<input type="radio" name="utype" value="1">radio-1 
+			<input type="radio" name="utype" value="2">radio-2
+		</div>
+	</div>
+
+	<hr/>
+	<div id="new-container">
+		<p>여기 아래로 추가</p>
+	</div>
+
+	<hr/>
+	<button id="copy1">추가</button>
+</form>
+
+```
+<form id="test1">
+		<div>
+			<input type="text" name="id" value="id100">
+		</div>
+	
+		<div id="target-1">
+			<div>
+				<input type="text" name="uname" value="test-name">
+			</div>
+			<div>
+				<input type="radio" name="utype" value="1">radio-1 
+				<input type="radio" name="utype" value="2">radio-2
+			</div>
+		</div>
+	
+		<hr/>
+		<div id="new-container">
+			<p>여기 아래로 추가</p>
+		</div>
+	
+		<hr/>
+		<button id="copy1">추가</button>
+</form>
+
+<script>
+		$("#copy1").on("click", function(e) {
+			e.preventDefault();
+			
+			// [target-1]의 내용을 복사하여 [new-conainer]에 붙여넣기
+			$("#target-1").children().clone().appendTo("#new-container");
+		});
+	
+</script>
+ ```
+ 
+	
+</xmp>
+
+ 
+
+<script src="../../js/lib/jquery-1.11.3.js"></script>
+<script src="../../js/lib/jquery.postjson.js"></script>
+<script src="../md/strapdown.js"></script>
+<script>
+	function setIndex() {}
+</script>
+<script>
+		$("#copy1").on("click", function(e) {
+			e.preventDefault();
+			
+			// [target-1]의 내용을 복사하여 [new-conainer]에 붙여넣기
+			$("#target-1").children().clone().appendTo("#new-container");
+		});
+	
+	</script>
+
+</html>
