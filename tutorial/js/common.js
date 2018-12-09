@@ -8,7 +8,8 @@ function setIndex() {
     { title: "JSTL", url: "" },
     { title: "iBatis", url: "" },
     { title: "SQL", url: "" },
-    { title: "자료모음", url: "" }
+    { title: "자료모음", url: "" },
+    { title: "Kotra", url: "./programming.html" }
   ];
 
   const contentEl = '<div id="header-container">';
