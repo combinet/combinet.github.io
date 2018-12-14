@@ -4,12 +4,13 @@ function setIndex() {
     { title: "Programming", url: "./programming.html" },
     { title: "Controller paramter", url: "./controller-parameter.html" },
     { title: "CRUD", url: "./crud.html" },
-    { title: "Javascript", url: "" },
-    { title: "JSTL", url: "" },
-    { title: "iBatis", url: "" },
-    { title: "SQL", url: "" },
-    { title: "자료모음", url: "" },
-    { title: "Kotra", url: "./assign.html" }
+    // { title: "Javascript", url: "" },
+    // { title: "JSTL", url: "" },
+    // { title: "iBatis", url: "" },
+    // { title: "SQL", url: "" },
+    // { title: "자료모음", url: "" },
+    { title: "Kotra", url: "./assign.html" },
+    { title: "Kotra(live)", url: "./assign.1.html" }
   ];
 
   const contentEl = '<div id="header-container">';
