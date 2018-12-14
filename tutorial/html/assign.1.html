@@ -27,7 +27,10 @@
   </div>
   <div class="col-md-5">
   	<ul id="selected-city"></ul>
-  </div>
+	</div>
+	<button id="btn-save">저장</button>
+	<input type="hidden" name="assingedNations" value="">
+
 </div>
 </div>
 
@@ -87,12 +90,38 @@
 
 		$(e.target).remove();
 	}
+
+	function save() {
+		var nations = $("#selected-city").find("li");
+		var nationCodes = [];
+
+		for(var i = 0; i < nations.length; i++) {
+			nationCodes.push(  $(nations[i]).attr("data-cd")  );
+		}
+
+		/* option 인경우 
+		var nations = $("#selected-city").find("option");
+		var nationCodes = [];
+
+		for(var i = 0; i < nations.length; i++) {
+			nationCodes.push( nations[i].value   );
+		}
+
+		*/
+
+
+		console.log(nationCodes.join());
+
+		$("input[name='assingedNations']").val( nationCodes.join() );
+	}
 	
 	$("#nation").live("change", onChangeNation).trigger("change");
 	
 	$("#target-city").live("dblclick", onClickCity);
 	
 	$("#selected-city").live("dblclick",  removeCity);
+
+	$("#btn-save").click(save);
 	
 </script>	 
 
@@ -128,6 +157,8 @@
 			<ul id="selected-city"></ul>
 		</div>
 	</div>
+	<button id="btn-save">저장</button>
+	<input type="hidden" name="assingedNations" value="">	
 	</div>
 		
 	<script>
@@ -186,6 +217,30 @@
 	
 			$(e.target).remove();
 		}
+
+	function save() {
+		var nations = $("#selected-city").find("li");
+		var nationCodes = [];
+
+		for(var i = 0; i < nations.length; i++) {
+			nationCodes.push(  $(nations[i]).attr("data-cd")  );
+		}
+
+		/* option 인경우 
+		var nations = $("#selected-city").find("option");
+		var nationCodes = [];
+
+		for(var i = 0; i < nations.length; i++) {
+			nationCodes.push( nations[i].value   );
+		}
+
+		*/
+
+
+		console.log(nationCodes.join());
+
+		$("input[name='assingedNations']").val( nationCodes.join() );
+	}		
 		
 		// on -> live 
 		// $("#nation").on("change", onChangeNation).trigger("change");
@@ -196,6 +251,8 @@
 		
 		// $("#selected-city").on("dblclick", "li", removeCity);
 		$("#selected-city").live("dblclick",  removeCity);
+
+		$("#btn-save").click(save);
 		
 	</script>	 
 	</body>
