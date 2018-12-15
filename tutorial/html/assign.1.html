@@ -126,6 +126,18 @@
 </script>	 
 
 <xmp theme="united" style="display:none;">
+	// java for 구문 예제 Start
+
+	String nationCodes = "CN, NN, MD";
+	String[] nationList = nationCodes.split(",");
+	int i;
+
+	for(i = 0; nationList.length; i++) {
+		query(nationList[i]);
+	}
+
+	// java for 구문 예제 End
+
 	<!DOCTYPE html>
 	<html>
 	
