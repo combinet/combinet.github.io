@@ -133,14 +133,20 @@
 	// IE event 문제 Start
 	if(e.target.nodeName.toLowerCase() !== "option") {
 		return;
-	}  	
-====>
+	}  
+
+	이부분을 아래와 같이 변경
 
 	var target = window.event.srcElement;
+	
 	if(target.nodeName.toLowerCase() !== "option") {
-			return;
+		return;
 	}  	
+
 	// IE event 문제 end
+==
+
+ 
 
 	// java for 구문 예제 Start
 
