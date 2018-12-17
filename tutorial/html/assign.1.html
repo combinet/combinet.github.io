@@ -62,7 +62,9 @@
 	}
 	
 	function onClickCity(e) {
-		if(e.target.nodeName.toLowerCase() !== "li") {
+		var target = window.event.srcElement;
+
+		if(target.nodeName.toLowerCase() !== "li") {
 			return;
 		}
 
@@ -84,7 +86,9 @@
 	}
 	
 	function removeCity(e) {
-		if(e.target.nodeName.toLowerCase() !== "li") {
+		var target = window.event.srcElement;
+
+		if(target.nodeName.toLowerCase() !== "li") {
 			return;
 		}		
 
@@ -126,6 +130,18 @@
 </script>	 
 
 <xmp theme="united" style="display:none;">
+	// IE event 문제 Start
+	if(e.target.nodeName.toLowerCase() !== "option") {
+		return;
+	}  	
+====>
+
+	var target = window.event.srcElement;
+	if(target.nodeName.toLowerCase() !== "option") {
+			return;
+	}  	
+	// IE event 문제 end
+
 	// java for 구문 예제 Start
 
 	String nationCodes = "CN, NN, MD";
@@ -162,6 +178,7 @@
 		<div class="col-md-2"> 
 		<ul class="list-group" style="margin-top:20px;">
 			<a class="list-group-item">+</a>
+			<a class="list-group-item">-</a>
 			<a class="list-group-item">-</a>
 		</ul>  	
 		</div>
@@ -200,7 +217,9 @@
 		
 		function onClickCity(e) {
 			// target 체크 : event가 발생한 대상이 li 인지 확인
-			if(e.target.nodeName.toLowerCase() !== "li") {
+			
+			var target = window.event.srcElement;
+			if(target.nodeName.toLowerCase() !== "li") {
 				return;
 			}
 			var $el = $(e.target);
@@ -223,7 +242,9 @@
 		
 		function removeCity(e) {
 			// target 체크 : event가 발생한 대상이 li 인지 확인
-			if(e.target.nodeName.toLowerCase() !== "li") {
+
+			var target = window.event.srcElement;
+			if(target.nodeName.toLowerCase() !== "li") {
 				return;
 			}		
 	
