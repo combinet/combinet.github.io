@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Assign</title>
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="../css/jquery-ui-1.10.4.custom.css" />
+	<script src="../../js/lib/jquery-1.11.3.js"></script>
+	<script src="../../js/lib/jquery-ui-datepicker.js"></script>
+</head>
+<body>	
+<div>
+	<p>시작일자<input type="text" id="dt-1"></p>
+	<p>종료일자<input type="text" id="dt-2"></p>
+
+	<p><input type="button" id="btn-save" value="표시"></p>
+	<p>결과: <span id="result"></span></p>
+</div>
+ 
+
+<script>
+ 
+	$("#dt-1").datepicker({dateFormat: "yymmdd"});
+	$("#dt-2").datepicker({dateFormat: "yymmdd"});
+
+	$("#btn-save").on("click", function(e) {
+		var start = $("#dt-1").val();
+		var end = $("#dt-1").val();
+
+		$("#result").text(start + " ~ " + end);
+	});
+
+</script>	 
+
+<xmp theme="united" style="display:none;">
+ 
+</xmp>
+
+<div id="index-container">
+	<ul></ul>
+	<button id="btn-index">목차</button>
+</div>
+
+<script src="../../js/lib/jquery.postjson.js"></script>
+<script src="../md/strapdown.js"></script>
+<script src="../js/common.js"></script>
+</body>	
+</html>

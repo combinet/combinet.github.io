@@ -10,7 +10,8 @@ function setIndex() {
     // { title: "SQL", url: "" },
     // { title: "자료모음", url: "" },
     { title: "Kotra", url: "./assign.html" },
-    { title: "Kotra(live)", url: "./assign.1.html" }
+    { title: "Kotra(live)", url: "./assign.1.html" },
+    { title: "datepicker", url: "./datepicker.html" }
   ];
 
   const contentEl = '<div id="header-container">';
