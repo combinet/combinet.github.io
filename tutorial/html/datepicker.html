@@ -34,6 +34,27 @@
 </script>	 
 
 <xmp theme="united" style="display:none;">
+	// 화면에서 제거한다.
+	var selected = $("select[name='atchFileList'] option:selected");
+	var optionEl, value, $a;
+	for(var i = 0; i < selected.length; i++) {
+		optionEl = selected[i];
+		value = optionEl.value;
+		
+		var aEl = $(".dv-write-input").find(".old070 a");
+		for(var j = 0; j < aEl.length; j++) {
+			if( aEl[j].href.indexOf(value) > -1 ) {
+				$( aEl[j] ).closest("span.old070").remove();
+				break;
+			}
+		}
+		$(optionEl).remove();
+	}
+	
+	//$("select[name='atchFileList'] option:selected").remove();
+
+	////////////////////////////////////////////////////////////////////
+
 		<!DOCTYPE html>
 		<html>
 		
